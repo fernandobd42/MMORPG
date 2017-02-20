@@ -2,7 +2,6 @@
 var mongo = require('mongodb');
 
 var connMongodb = function(){
-    console.log('Connectou com o db')
     var db = new mongo.Db(
         'mmorpg',
         new mongo.Server(
