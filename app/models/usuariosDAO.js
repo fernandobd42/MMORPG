@@ -2,7 +2,7 @@ function usuariosDAO(connection){
     this._connection = connection();
 }
 
-usuariosDAO.prototype.inserirUsuario = function(usuario){
+usuariosDAO.prototype.cadastrar = function(usuario){
     this._connection.open( function(err, mongoclient){
         mongoclient.collection('usuarios', function(err, collection){
             collection.insert(usuario)

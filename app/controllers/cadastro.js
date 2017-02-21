@@ -23,7 +23,7 @@ module.exports.cadastrar = function(application, req, res){
 
     var usuariosDAO = new application.app.models.usuariosDAO(connection);
 
-    usuariosDAO.inserirUsuario(dadosForm)
+    usuariosDAO.cadastrar(dadosForm)
 
-    res.send('Cadastro Efetuado com Sucesso!')
+    res.render('index', {validacao: erros})
 }
