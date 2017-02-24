@@ -1,3 +1,5 @@
+var ObjectID = require('mongodb').ObjectId;
+
 function jogoDAO(connection){
     this._connection = connection();
 }
@@ -80,11 +82,24 @@ jogoDAO.prototype.getAcoes = function(usuario, res){
             momento_atual = date.getTime()
             collection.find({usuario: usuario, acao_termina_em: {$gt: momento_atual}}).toArray( function(err, result){
 
-
                 res.render('pergaminhos', {acoes: result})
 
                 mongoclient.close();
             });
+        });
+    });
+}
+
+jogoDAO.prototype.revogarAcao = function(_id, res){
+    this._connection.open( function(err, mongoclient){
+        mongoclient.collection('acao', function(err, collection){
+            collection.remove(
+                {_id: ObjectID(_id)},
+                function(err, result){
+                    res.redirect('jogo?msg=D');
+                    mongoclient.close();
+                }
+            );
         });
     });
 }
